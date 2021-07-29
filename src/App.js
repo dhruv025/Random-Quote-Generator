@@ -1,16 +1,16 @@
 import React, {useState,useEffect} from 'react';
 import './App.css';
-import axios from 'axios';
 
 function App(){
 
   const [quote,setQuote] = useState("");
   
   const fetchQuote = () =>{
-    return axios.get('https://type.fit/api/quotes')
-    .then((response) => {
-      let randNum = Math.floor(Math.random()*response.data.length);
-      setQuote(response.data[randNum]);
+    fetch('https://type.fit/api/quotes')
+    .then((response) => response.json())
+    .then((data) => {
+      let randNum = Math.floor(Math.random()*data.length);
+      setQuote(data[randNum]);
     })
     .catch((error) =>{
       console.log(error);
